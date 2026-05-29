@@ -1,6 +1,5 @@
 //Atualização do botão
 const botaoTema = document.querySelector('#rodape button');
-
 const temaSalvo = localStorage.getItem('tema');
 if (temaSalvo === 'dark') {
     document.body.classList.add('dark-mode');
@@ -19,27 +18,10 @@ botaoTema.addEventListener('click', () => {
         localStorage.setItem('tema', 'light');
     }
 });
-
-//Renderizar Vídeo
-import { videosProjetos } from './videoprojetos.js';
-const containerVideos = document.getElementById('edited-videos');
-function carregarProjetos() {
-    containerVideos.innerHTML = videosProjetos.map(video => `
-        <div class="video-card">
-            <h3>${video.titulo}</h3>
-            <span>${video.tipo}</span>
-            <iframe src="${video.urlYoutube}" frameborder="0" allowfullscreen></iframe>
-        </div>
-    `).join('');
-}
-
-carregarProjetos();
-
 //Contatos
 const linkWhatsapp = document.querySelector('a[href=""]');
 const numeroTelefone = "5581997254072";
 const mensagem = encodeURIComponent("Olá, Gabriel! Vi seu portfólio de edição e gostaria de fazer um orçamento.");
-
 if (linkWhatsapp) {
     linkWhatsapp.href = `https://wa.me/${numeroTelefone}?text=${mensagem}`;
     linkWhatsapp.setAttribute('target', '_blank'); 
