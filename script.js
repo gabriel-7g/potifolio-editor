@@ -21,21 +21,7 @@ botaoTema.addEventListener('click', () => {
 });
 
 //Renderizar Vídeo
-const videosProjetos = [
-    {
-        titulo: "Vídeo Institucional - Cliente X",
-        tipo: "Reels / Shorts",
-        urlYoutube: "https://www.youtube.com/embed/EXEMPLO1",
-        thumb: "caminho/da/sua/thumb1.jpg"
-    },
-    {
-        titulo: "Campanha Publicitária - Estabelecimento Y",
-        tipo: "Comercial",
-        urlYoutube: "https://www.youtube.com/embed/EXEMPLO2",
-        thumb: "caminho/da/sua/thumb2.jpg"
-    }
-];
-
+import { videosProjetos } from './videoprojetos.js';
 const containerVideos = document.getElementById('edited-videos');
 function carregarProjetos() {
     containerVideos.innerHTML = videosProjetos.map(video => `
@@ -46,17 +32,17 @@ function carregarProjetos() {
         </div>
     `).join('');
 }
+
 carregarProjetos();
 
 //Contatos
-
 const linkWhatsapp = document.querySelector('a[href=""]');
 const numeroTelefone = "5581997254072";
 const mensagem = encodeURIComponent("Olá, Gabriel! Vi seu portfólio de edição e gostaria de fazer um orçamento.");
 
 if (linkWhatsapp) {
     linkWhatsapp.href = `https://wa.me/${numeroTelefone}?text=${mensagem}`;
-    linkWhatsapp.setAttribute('target', '_blank'); // Abre em uma nova aba
+    linkWhatsapp.setAttribute('target', '_blank'); 
 }
 
 //Animação do site
