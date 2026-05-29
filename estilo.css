@@ -1,0 +1,429 @@
+/* =========================================
+   GABRIEL EDITOR — estilo.css
+   Tema: Editorial Cinematográfico (Responsivo)
+   ========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;600&display=swap');
+
+/* ─── VARIÁVEIS DE TEMA ─── */
+.light-mode {
+  --bg-primary: #f5f0e8;
+  --bg-secondary: #ede7d9;
+  --bg-card: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.6);
+  --text-primary: #1a1612;
+  --text-secondary: #5c5040;
+  --text-muted: #8a7a6a;
+  --accent: #c8733a;
+  --accent-light: #e8956a;
+  --accent-glow: rgba(200, 115, 58, 0.25);
+  --border: rgba(26, 22, 18, 0.12);
+  --border-strong: rgba(26, 22, 18, 0.25);
+  --shadow-soft: 0 4px 24px rgba(26, 22, 18, 0.08);
+  --shadow-card: 0 8px 40px rgba(26, 22, 18, 0.12);
+  --shadow-strong: 0 16px 64px rgba(26, 22, 18, 0.18);
+  --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  --gradient-hero: linear-gradient(135deg, #f5f0e8 0%, #ede7d9 50%, #e0d5c5 100%);
+  --btn-bg: #1a1612;
+  --btn-text: #f5f0e8;
+  --tag-bg: rgba(200, 115, 58, 0.12);
+  --tag-text: #c8733a;
+}
+
+.dark-mode {
+  --bg-primary: #0e0c0a;
+  --bg-secondary: #161310;
+  --bg-card: #1c1814;
+  --bg-glass: rgba(28, 24, 20, 0.7);
+  --text-primary: #f0ebe3;
+  --text-secondary: #b5a898;
+  --text-muted: #6e6058;
+  --accent: #e8956a;
+  --accent-light: #f0b090;
+  --accent-glow: rgba(232, 149, 106, 0.2);
+  --border: rgba(240, 235, 227, 0.08);
+  --border-strong: rgba(240, 235, 227, 0.18);
+  --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 8px 40px rgba(0, 0, 0, 0.5);
+  --shadow-strong: 0 16px 64px rgba(0, 0, 0, 0.6);
+  --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.07'/%3E%3C/svg%3E");
+  --gradient-hero: linear-gradient(135deg, #0e0c0a 0%, #161310 50%, #1c1510 100%);
+  --btn-bg: #f0ebe3;
+  --btn-text: #0e0c0a;
+  --tag-bg: rgba(232, 149, 106, 0.12);
+  --tag-text: #e8956a;
+}
+
+/* ─── RESET & BASE ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: var(--grain);
+  background-size: 200px 200px;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  width: 40vw;
+  height: 40vw;
+  min-width: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  top: -10%; right: -10%;
+  pointer-events: none;
+  z-index: 0;
+  animation: floatBlob 12s ease-in-out infinite;
+}
+
+@keyframes floatBlob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-30px, 40px) scale(1.05); }
+  66% { transform: translate(20px, -20px) scale(0.95); }
+}
+
+/* ─── LAYOUT ─── */
+.container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ─── BARRA DE TOPO (Fixa / Sticky) ─── */
+#rodape {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  max-width: 100%;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: var(--bg-glass);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+#rodape::before {
+  content: 'GC';
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 1.4rem;
+  color: var(--accent);
+}
+
+#rodape button {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  border: 1.5px solid var(--border-strong);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#rodape button::before {
+  content: '●';
+  font-size: 0.5rem;
+  color: var(--accent);
+}
+
+#rodape button:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* ─── APRESENTAÇÃO (Hero) ─── */
+#topo {
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  animation: fadeInUp 0.8s ease both;
+}
+
+#topo img {
+  width: 180px;
+  height: 180px;
+  border-radius: 28% 72% 34% 66% / 54% 42% 58% 46%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  box-shadow: var(--shadow-card);
+  margin-bottom: 0.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+#topo::before {
+  content: '— editor & motion designer';
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+#topo h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 7vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+#topo p {
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 600px;
+  border-left: none;
+  border-bottom: 2px solid var(--accent);
+  padding: 0 0 1.2rem 0;
+}
+
+#topo::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+/* ─── SEÇÃO DE FERRAMENTAS (Grid Responsivo) ─── */
+#ferramentas {
+  padding: 2.5rem 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+#ferramentas::before {
+  content: 'ferramentas';
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  grid-column: 1 / -1;
+}
+
+.item-ferramenta {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.item-ferramenta:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-card);
+}
+
+.item-ferramenta img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.item-ferramenta p {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* ─── VÍDEOS EDITADOS (Galeria) ─── */
+#edited-videos {
+  padding: 3rem 1.5rem;
+  animation: fadeInUp 0.8s ease 0.3s both;
+}
+
+#edited-videos h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  font-style: italic;
+}
+
+#edited-videos span {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  display: block;
+}
+
+#edited-videos::after {
+  content: '';
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ─── SEÇÃO DE CONTATOS (Redes Sociais) ─── */
+.container:last-of-type {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 4rem;
+}
+
+a#instagram,
+a#whatsapp {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+a#instagram {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+}
+
+a#instagram::before { content: '↗'; font-size: 1rem; }
+
+a#instagram:hover {
+  background: var(--accent);
+  box-shadow: 0 8px 24px var(--accent-glow);
+}
+
+a#whatsapp {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1.5px solid var(--border-strong);
+}
+
+a#whatsapp::before { content: '◎'; font-size: 0.7rem; color: var(--accent); }
+
+a#whatsapp:hover {
+  background: var(--bg-card);
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+
+/* ─── OUTROS ELEMENTOS ─── */
+.divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+  margin: 0 1.5rem;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 100px; }
+::selection { background: var(--accent); color: #fff; }
+
+/* ─── MEDIA QUERIES (Ajustes para Telas Maiores) ─── */
+
+/* Tablets em diante (min-width: 600px) */
+@media (min-width: 600px) {
+  #ferramentas {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .container:last-of-type {
+    flex-direction: row;
+  }
+
+  a#instagram,
+  a#whatsapp {
+    width: auto;
+    padding: 0.75rem 1.8rem;
+  }
+}
+
+/* Computadores (min-width: 768px) */
+@media (min-width: 768px) {
+  .container {
+    padding: 0 2rem;
+  }
+  #rodape {
+    padding: 1.5rem 3rem;
+  }
+  #topo {
+    padding-top: 5rem;
+    padding-bottom: 4rem;
+    align-items: flex-start;
+    text-align: left;
+  }
+  #topo img {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  #topo p {
+    border-left: 2px solid var(--accent);
+    border-bottom: none;
+    padding-left: 1.2rem;
+    padding-bottom: 0;
+  }
+  #topo::after {
+    background: linear-gradient(90deg, var(--accent), transparent);
+  }
+}

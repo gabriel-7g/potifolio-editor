@@ -5,19 +5,26 @@ if (temaSalvo === 'dark') {
     document.body.classList.add('dark-mode');
     botaoTema.textContent = 'Claro';
 } else {
+    document.body.classList.add('light-mode');
     botaoTema.textContent = 'Escuro';
 }
 
 botaoTema.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    if (document.body.classList.contains('dark-mode')) {
-        botaoTema.textContent = 'Claro';
-        localStorage.setItem('tema', 'dark');
+    if (document.body.classList.contains('light-mode')) {
+        document.body.classList.remove('light-mode');
+        document.body.classList.add('dark-mode');
+        
+        botaoTema.textContent = 'Claro';       
+        localStorage.setItem('tema', 'dark'); 
     } else {
-        botaoTema.textContent = 'Escuro';
-        localStorage.setItem('tema', 'light');
+        document.body.classList.remove('dark-mode');
+        document.body.classList.add('light-mode');
+        
+        botaoTema.textContent = 'Escuro';       
+        localStorage.setItem('tema', 'light'); 
     }
 });
+
 //Contatos
 const linkWhatsapp = document.querySelector('a[href=""]');
 const numeroTelefone = "5581997254072";
