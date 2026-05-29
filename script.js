@@ -50,8 +50,8 @@ carregarProjetos();
 
 //Contatos
 
-const linkWhatsapp = document.querySelector('a[href=""]'); // Seleciona o link que está vazio
-const numeroTelefone = "5581997254072"; // Seu número com DDD (exemplo de PE)
+const linkWhatsapp = document.querySelector('a[href=""]');
+const numeroTelefone = "5581997254072";
 const mensagem = encodeURIComponent("Olá, Gabriel! Vi seu portfólio de edição e gostaria de fazer um orçamento.");
 
 if (linkWhatsapp) {
