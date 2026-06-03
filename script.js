@@ -48,3 +48,49 @@ containers.forEach(container => {
     container.classList.add('fade-in-hidden');
     observer.observe(container);
 });
+
+//Carregar Vídeos
+const meusVideos = [
+    { arquivo: "https://www.youtube.com/watch?v=UpNkULDx2JQ", short: false },
+    { arquivo: "https://www.youtube.com/watch?v=b_B1tsyPXVg", short: false },
+    { arquivo: "https://www.youtube.com/watch?v=c8BFJhhWqkc&feature=youtu.be", short: false },
+    { arquivo: "https://www.youtube.com/shorts/gPobiAdSD_E", short: true },
+    { arquivo: "https://www.youtube.com/shorts/2O1kYFhm40E", short: true }
+]
+
+// Extrai o ID do vídeo e retorna a URL de embed correta
+function getEmbedUrl(url, short) {
+    if (short) {
+        const id = url.split('/shorts/')[1]?.split('?')[0];
+        return `https://www.youtube.com/embed/${id}`;
+    } else {
+        const id = new URL(url).searchParams.get('v');
+        return `https://www.youtube.com/embed/${id}`;
+    }
+}
+
+const gridPortifolio = document.getElementById('lista-portfolio');
+
+function carregarPortifolio() {
+    let htmlGerado = "";
+    meusVideos.map(({ arquivo, short }) => {
+        const embedUrl = getEmbedUrl(arquivo, short);
+        htmlGerado += `
+            <div class="video-card ${short ? 'video-card--short' : ''}">
+                <div class="video-wrapper">
+                    <iframe
+                        width="100%"
+                        height="100%"
+                        src="${embedUrl}"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        `
+    })
+    gridPortifolio.innerHTML = htmlGerado;
+}
+
+carregarPortifolio();
