@@ -27,7 +27,7 @@ botaoTema.addEventListener('click', () => {
 
 //Contatos
 const linkWhatsapp = document.querySelector('a[href=""]');
-const numeroTelefone = "5581997254072";
+const numeroTelefone = "5581989306691";
 const mensagem = encodeURIComponent("Olá, Gabriel! Vi seu portfólio de edição e gostaria de fazer um orçamento.");
 if (linkWhatsapp) {
     linkWhatsapp.href = `https://wa.me/${numeroTelefone}?text=${mensagem}`;
